@@ -4,7 +4,6 @@
 Created by Ben Scott on '25/01/2017'.
 """
 import simplejson as json
-import re
 from lxml import etree
 from collections import OrderedDict
 from distutils.util import strtobool
@@ -33,7 +32,7 @@ class XSDParser:
         """ Build a list of all type extensions which can be extended by the main class
         For example - http://www.w3schools.com/xml/el_complextype.asp
         """
-        for complex_type_element in self.root.findall("xs:complexType/xs:simpleType",namespaces=self.namespaces):
+        for complex_type_element in self.root.findall("xs:simpleType",namespaces=self.namespaces):
             name = complex_type_element.attrib['name']
             schema = {}
             self.parse_element_recurse(complex_type_element, schema)
