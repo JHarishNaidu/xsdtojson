@@ -38,7 +38,7 @@ class XSDParser:
             schema = {}
             self.parse_element_recurse(complex_type_element, schema)
             print(schema)
-            schema = self.flatten_schema(schema)
+            #schema = self.flatten_schema(schema)
 
             self.type_extensions[name] = schema
             
@@ -134,7 +134,7 @@ class XSDParser:
             self.parse_element_recurse(element, schema)
 
         # Flatten the schema - so if there's just one element at the root, this is removed
-        schema = self.flatten_schema(schema)
+        #schema = self.flatten_schema(schema)
         # Set schema
         schema['schema'] = 'http://json-schema.org/schema#'
         schema['type'] = 'object'
