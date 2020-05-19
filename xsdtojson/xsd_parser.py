@@ -79,7 +79,10 @@ class XSDParser:
                     #schema['properties'][element_name] = self.type_extensions[element_type]
                     schema[element_name] = self.type_extensions[element_type]
                 except KeyError:
-                    schema['properties'][element_name] = {
+                    #schema['properties'][element_name] = {
+                    #    'type': self.xsd_to_json_schema_type(element_type)
+                    #}
+                    schema[element_name] = {
                         'type': self.xsd_to_json_schema_type(element_type)
                     }
                 if min_occurs > 0 or nillable:
