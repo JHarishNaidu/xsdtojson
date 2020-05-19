@@ -47,7 +47,7 @@ class XSDParser:
             schema = {}
             self.parse_element_recurse(complex_type_element, schema)
             print(schema)
-            schema = self.flatten_schema(schema)
+            #schema = self.flatten_schema(schema)
 
             self.type_extensions[name] = schema
 
@@ -72,11 +72,12 @@ class XSDParser:
         # If this element has a name, add it to the schema tree
         elif element_name:
             # Create properties dict if it doesn't already exist
-            schema.setdefault('properties', OrderedDict())
+            #schema.setdefault('properties', OrderedDict())
             # If this element has a type, it needs to be an item in the schema
             if element_type:
                 try:
-                    schema['properties'][element_name] = self.type_extensions[element_type]
+                    #schema['properties'][element_name] = self.type_extensions[element_type]
+                    schema[element_name] = self.type_extensions[element_type]
                 except KeyError:
                     schema['properties'][element_name] = {
                         'type': self.xsd_to_json_schema_type(element_type)
@@ -88,10 +89,12 @@ class XSDParser:
                 # If min occurs or nillable is set, then make this element required
                 if min_occurs > 0 or nillable:
                     schema.setdefault('required', []).append(element_name)
-                schema['properties'][element_name] = OrderedDict()
+                #schema['properties'][element_name] = OrderedDict()
+                schema[element_name] = {}
                 # Update schema pointer to use the nested element
                 # This allows us to build the tree
-                schema = schema['properties'][element_name]
+                #schema = schema['properties'][element_name]
+                schema = schema[element_name]
 
         # Does this element have any element descendants?
         # If does, recursively call function
@@ -114,7 +117,7 @@ class XSDParser:
             # If there's no child properties, do no flatten
             if 'properties' in schema['properties'][first_property]:
                 schema = schema['properties'][first_property]
-        return json.loads(json.dumps(schema))
+        return schema
 
     def json_schema(self):
         """
