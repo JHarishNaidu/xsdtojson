@@ -113,7 +113,7 @@ class XSDParser:
             # If there's no child properties, do no flatten
             if 'properties' in schema['properties'][first_property]:
                 schema = schema['properties'][first_property]
-        return schema
+        return json.dumps(schema, sort_keys=False, indent=4)
 
     def json_schema(self):
         """
