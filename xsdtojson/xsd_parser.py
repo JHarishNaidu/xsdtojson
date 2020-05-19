@@ -4,6 +4,7 @@
 Created by Ben Scott on '25/01/2017'.
 """
 import simplejson as json
+import json
 from lxml import etree
 from collections import OrderedDict
 from distutils.util import strtobool
@@ -113,7 +114,7 @@ class XSDParser:
             # If there's no child properties, do no flatten
             if 'properties' in schema['properties'][first_property]:
                 schema = schema['properties'][first_property]
-                schema = json.loads(json.dumps(schema)
+        schema = json.loads(json.dumps(schema)
         return schema
 
     def json_schema(self):
