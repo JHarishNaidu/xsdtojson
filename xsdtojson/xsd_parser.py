@@ -21,11 +21,13 @@ class XSDParser:
         try:
             # Try and read src as XML (will work for requests.content (string)
             self.root = etree.XML(xsd_src)
+            print(self.root)
         except etree.XMLSyntaxError:
             # Or parse the object (will work for files)
             doc = etree.parse(xsd_src)
             self.root = doc.getroot()
-
+            print(self.root)
+                
         self.namespaces = self.root.nsmap
         self.build_type_extensions()
 
