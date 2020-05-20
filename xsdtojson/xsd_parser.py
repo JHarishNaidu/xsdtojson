@@ -30,11 +30,13 @@ class XSDParser:
                 
         self.namespaces = self.root.nsmap
         self.build_type_extensions()
+        print(type_extensions)
 
     def build_type_extensions(self):
         """ Build a list of all type extensions which can be extended by the main class
         For example - http://www.w3schools.com/xml/el_complextype.asp
         """
+        print(self.root.findall)
         for complex_type_element in self.root.findall("xs:complexType",namespaces=self.namespaces):
             name = complex_type_element.attrib['name']
             schema = {}
