@@ -21,12 +21,12 @@ class XSDParser:
         try:
             # Try and read src as XML (will work for requests.content (string)
             self.root = etree.XML(xsd_src)
-            print(self.root)
+            
         except etree.XMLSyntaxError:
             # Or parse the object (will work for files)
             doc = etree.parse(xsd_src)
             self.root = doc.getroot()
-            print(self.root)
+            
                 
         self.namespaces = self.root.nsmap
         self.build_type_extensions()
@@ -35,8 +35,7 @@ class XSDParser:
         """ Build a list of all type extensions which can be extended by the main class
         For example - http://www.w3schools.com/xml/el_complextype.asp
         """
-        for complex_type_element in self.root.findall(".",namespaces=self.namespaces):
-            print(complex_type_element)
+        print(self.root.types)
 
             
         for complex_type_element in self.root.findall("xs:complexType",namespaces=self.namespaces):
