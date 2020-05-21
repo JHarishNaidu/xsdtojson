@@ -53,7 +53,7 @@ class XSDParser:
             print(schema)
             #schema = self.flatten_schema(schema)
 
-            self.type_extensions[name] = schema
+            self.type_extensions[name] = schema+","
 
     def parse_element_recurse(self, element, schema):
         """
@@ -90,19 +90,23 @@ class XSDParser:
                         'type': self.xsd_to_json_schema_type(element_type)
                     }
                 if min_occurs > 0 or nillable:
-                    schema.setdefault('required', []).append(element_name)
+                    #schema.setdefault('required', []).append(element_name)
             # If there's no element type, use it to build the schema tree
             else:
                 # If min occurs or nillable is set, then make this element required
                 if min_occurs > 0 or nillable:
-                    schema.setdefault('required', []).append(element_name)
+                    #schema.setdefault('required', []).append(element_name)
                 #schema['properties'][element_name] = OrderedDict()
                 schema[element_name] = {}
                 # Update schema pointer to use the nested element
                 # This allows us to build the tree
                 #schema = schema['properties'][element_name]
                 schema = schema[element_name]
-
+                
+                if element.findall(".//xs:documentation", namespaces=self.namespaces):
+                    description = element.find(".//xs:documentation").get_text()
+                    schema = schema[element_description]
+                
         # Does this element have any element descendants?
         # If does, recursively call function
         if element.findall(".//xs:element", namespaces=self.namespaces):
