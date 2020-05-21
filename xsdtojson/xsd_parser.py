@@ -95,8 +95,8 @@ class XSDParser:
             # If there's no element type, use it to build the schema tree
             else:
                 # If min occurs or nillable is set, then make this element required
-                if min_occurs > 0 or nillable:
-                    #schema.setdefault('required', []).append(element_name)
+                #if min_occurs > 0 or nillable:
+                   #schema.setdefault('required', []).append(element_name)
                 #schema['properties'][element_name] = OrderedDict()
                 schema[element_name] = {}
                 # Update schema pointer to use the nested element
