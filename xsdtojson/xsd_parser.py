@@ -29,7 +29,7 @@ class XSDParser:
             
                 
         self.namespaces = self.root.nsmap
-        print (self.namespaces)
+        
         self.build_type_extensions()
 
     def build_type_extensions(self):
@@ -42,9 +42,9 @@ class XSDParser:
             name = complex_type_element.attrib['name']
             schema = {}
             self.parse_element_recurse(complex_type_element, schema)
-            print(schema)
+            #print(schema)
             #schema = self.flatten_schema(schema)
-            schema = json.dumps(schema, sort_keys=False, indent=4)
+           
             self.type_extensions[name] = schema
             
             
@@ -52,9 +52,9 @@ class XSDParser:
             name = complex_type_element.attrib['name']
             schema = {}
             self.parse_element_recurse(complex_type_element, schema)
-            print(schema)
+            #print(schema)
             #schema = self.flatten_schema(schema)
-            schema = json.dumps(schema, sort_keys=False, indent=4)
+            
             self.type_extensions[name] = schema
 
     def parse_element_recurse(self, element, schema):
