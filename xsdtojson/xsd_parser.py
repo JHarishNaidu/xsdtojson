@@ -8,6 +8,8 @@ import json
 from lxml import etree
 from collections import OrderedDict
 from distutils.util import strtobool
+import re
+from bs4 import BeautifulSoup
 
 
 class XSDParser:
@@ -67,7 +69,8 @@ class XSDParser:
         element_name = element.attrib.get('name')
         element_type = element.attrib.get('type')
         element_base = element.attrib.get('base')
-        element_desctiption = element.findall('.//xsd:documentation').get_text()
+        soup = BeautifulSoup(element)
+        element_desctiption = soup.find('xsd:documentation').get_text()
         # As per XSD spec, minOccurs defaults to 1, so unless
         # otherwise stated, all fields are required
         min_occurs = int(element.attrib.get('minOccurs', 1))
