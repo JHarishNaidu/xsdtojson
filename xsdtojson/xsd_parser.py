@@ -142,9 +142,9 @@ class XSDParser:
         # Flatten the schema - so if there's just one element at the root, this is removed
         #schema = self.flatten_schema(schema)
         # Set schema
-        schema['schema'] = 'http://json-schema.org/schema#'
-        schema['type'] = 'object'
-        return json.dumps(schema, sort_keys=False, indent=4)
+        #schema['schema'] = 'http://json-schema.org/schema#'
+        #schema['type'] = 'object'
+        return json.dumps(self.type_extensions, sort_keys=False, indent=4)
 
     def xsd_to_json_schema_type(self, element_type):
         try:
