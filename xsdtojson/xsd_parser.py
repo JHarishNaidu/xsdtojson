@@ -69,7 +69,7 @@ class XSDParser:
         element_name = element.attrib.get('name')
         element_type = element.attrib.get('type')
         element_base = element.attrib.get('base')
-        soup = BeautifulSoup(element)
+        soup = BeautifulSoup(element,features="lxml")
         element_desctiption = soup.find('xsd:documentation').get_text()
         # As per XSD spec, minOccurs defaults to 1, so unless
         # otherwise stated, all fields are required
