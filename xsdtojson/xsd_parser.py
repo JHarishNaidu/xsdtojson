@@ -35,10 +35,9 @@ class XSDParser:
         """ Build a list of all type extensions which can be extended by the main class
         For example - http://www.w3schools.com/xml/el_complextype.asp
         """
-        print(self.root.types)
-
             
         for complex_type_element in self.root.findall("xs:complexType",namespaces=self.namespaces):
+            print(complex_type_element.types)
             name = complex_type_element.attrib['name']
             schema = {}
             self.parse_element_recurse(complex_type_element, schema)
