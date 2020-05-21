@@ -54,7 +54,7 @@ class XSDParser:
             print(schema)
             #schema = self.flatten_schema(schema)
 
-            self.type_extensions[name] = schema+","
+            self.type_extensions[name] = schema
 
     def parse_element_recurse(self, element, schema):
         """
@@ -102,11 +102,7 @@ class XSDParser:
                 # Update schema pointer to use the nested element
                 # This allows us to build the tree
                 #schema = schema['properties'][element_name]
-                schema = schema[element_name]
-                
-                #if element.findall(".//xs:documentation", namespaces=self.namespaces):
-                   # description = element.find(".//xs:documentation").get_text()
-                   # schema = schema[element_description]
+                schema = schema[element_name]           
                 
         # Does this element have any element descendants?
         # If does, recursively call function
