@@ -67,7 +67,7 @@ class XSDParser:
         element_name = element.attrib.get('name')
         element_type = element.attrib.get('type')
         element_base = element.attrib.get('base')
-        element_desctiption = element.findall('.//xs:documentation').get_text()
+        element_desctiption = element.findall('.//xsd:documentation').get_text()
         # As per XSD spec, minOccurs defaults to 1, so unless
         # otherwise stated, all fields are required
         min_occurs = int(element.attrib.get('minOccurs', 1))
