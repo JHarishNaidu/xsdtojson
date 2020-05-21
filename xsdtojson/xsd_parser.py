@@ -67,6 +67,7 @@ class XSDParser:
         element_name = element.attrib.get('name')
         element_type = element.attrib.get('type')
         element_base = element.attrib.get('base')
+        element_desctiption = element.find('xs:documentation').get_text()
         # As per XSD spec, minOccurs defaults to 1, so unless
         # otherwise stated, all fields are required
         min_occurs = int(element.attrib.get('minOccurs', 1))
@@ -84,6 +85,7 @@ class XSDParser:
                 try:
                     #schema['properties'][element_name] = self.type_extensions[element_type]
                     schema[element_name] = self.type_extensions[element_type]
+                    
                 except KeyError:
                     #schema['properties'][element_name] = {
                     #    'type': self.xsd_to_json_schema_type(element_type)
@@ -91,9 +93,14 @@ class XSDParser:
                     schema[element_name] = {
                         'type': self.xsd_to_json_schema_type(element_type)
                     }
+                  
                 #if min_occurs > 0 or nillable:
                     #schema.setdefault('required', []).append(element_name)
             # If there's no element type, use it to build the schema tree
+            elif element_desctiption:
+                schema[element_name] = {
+                        'description': element_desctiption
+                    }
             else:
                 # If min occurs or nillable is set, then make this element required
                 #if min_occurs > 0 or nillable:
