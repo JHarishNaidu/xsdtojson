@@ -29,6 +29,7 @@ class XSDParser:
             
                 
         self.namespaces = self.root.nsmap
+        print (self.namespaces)
         self.build_type_extensions()
 
     def build_type_extensions(self):
@@ -37,7 +38,7 @@ class XSDParser:
         """
             
         for complex_type_element in self.root.findall("xs:complexType",namespaces=self.namespaces):
-            print(complex_type_element.types)
+            
             name = complex_type_element.attrib['name']
             schema = {}
             self.parse_element_recurse(complex_type_element, schema)
@@ -89,7 +90,7 @@ class XSDParser:
                     schema[element_name] = {
                         'type': self.xsd_to_json_schema_type(element_type)
                     }
-                if min_occurs > 0 or nillable:
+                #if min_occurs > 0 or nillable:
                     #schema.setdefault('required', []).append(element_name)
             # If there's no element type, use it to build the schema tree
             else:
@@ -103,9 +104,9 @@ class XSDParser:
                 #schema = schema['properties'][element_name]
                 schema = schema[element_name]
                 
-                if element.findall(".//xs:documentation", namespaces=self.namespaces):
-                    description = element.find(".//xs:documentation").get_text()
-                    schema = schema[element_description]
+                #if element.findall(".//xs:documentation", namespaces=self.namespaces):
+                   # description = element.find(".//xs:documentation").get_text()
+                   # schema = schema[element_description]
                 
         # Does this element have any element descendants?
         # If does, recursively call function
