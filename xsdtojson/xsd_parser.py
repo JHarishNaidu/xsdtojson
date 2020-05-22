@@ -69,9 +69,9 @@ class XSDParser:
         element_name = element.attrib.get('name')
         element_type = element.attrib.get('type')
         element_base = element.attrib.get('base')
-        print(element.attrib)
+        #print(element.attrib)
         
-        element_desctiption = element.find('/xs:attribute/xs:annotation/xs:documentation').get_text()
+        #element_desctiption = element.find('/xs:attribute/xs:annotation/xs:documentation').get_text()
         # As per XSD spec, minOccurs defaults to 1, so unless
         # otherwise stated, all fields are required
         min_occurs = int(element.attrib.get('minOccurs', 1))
@@ -101,9 +101,9 @@ class XSDParser:
                 #if min_occurs > 0 or nillable:
                     #schema.setdefault('required', []).append(element_name)
             # If there's no element type, use it to build the schema tree
-            elif element_desctiption:
-                schema[element_name] = {
-                        'description': element_desctiption
+            #elif element_desctiption:
+             #   schema[element_name] = {
+               #         'description': element_desctiption
                     }
             else:
                 # If min occurs or nillable is set, then make this element required
