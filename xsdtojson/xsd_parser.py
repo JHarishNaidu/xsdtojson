@@ -101,10 +101,7 @@ class XSDParser:
                 #if min_occurs > 0 or nillable:
                     #schema.setdefault('required', []).append(element_name)
             # If there's no element type, use it to build the schema tree
-            #elif element_desctiption:
-             #   schema[element_name] = {
-               #         'description': element_desctiption
-                    }
+
             else:
                 # If min occurs or nillable is set, then make this element required
                 #if min_occurs > 0 or nillable:
